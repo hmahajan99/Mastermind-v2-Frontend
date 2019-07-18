@@ -184,7 +184,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(process.env)
+
     const { isSignedIn, imageUrl, route, boxes, isProfileOpen, user } = this.state;
     return (
       <div className="App">
