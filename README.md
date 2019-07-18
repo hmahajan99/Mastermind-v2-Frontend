@@ -20,8 +20,9 @@ For the previous version of this app, Mastermind 1.0 see https://github.com/hmah
 To run this project :
 1. Clone this repo
 2. Change your directory : `cd Mastermind2-frontend`
-3. Set up environment variable REACT_APP_BACKEND_URL  
-4. Run `npm run dev`
+3. Run `npm install`
+4. Set up environment variable REACT_APP_BACKEND_URL  
+5. Run `npm run dev`
 
 #### Face Detection :
 ![](screenshots/FaceDetection.JPG)
