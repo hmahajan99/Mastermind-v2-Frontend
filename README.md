@@ -1,6 +1,6 @@
 # Mastermind 2.0 (Frontend)
 
-> This is a web application which uses machine learning to detect faces in your images with provisions for registering, signing in, viewing the leaderboard.
+> This is a web application which uses machine learning to detect faces in your images with provisions for registering, signing in, viewing the leaderboard and editing profiles.
 
 > This repository hosts the code for the frontend. Code for the backend part can be found at https://github.com/hmahajan99/Mastermind2-backend.
 For the previous version of this app, Mastermind 1.0 see https://github.com/hmahajan99/Mastermind.
