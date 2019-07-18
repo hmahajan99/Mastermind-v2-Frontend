@@ -2,7 +2,7 @@
 
 > This is a web application which uses machine learning to detect faces in your images with provisions for registering, signing in, viewing the leaderboard.
 
-> This repository hosts the code for the backend. Code for the backend part can be found at https://github.com/hmahajan99/Mastermind2-frontend.
+> This repository hosts the code for the frontend. Code for the backend part can be found at https://github.com/hmahajan99/Mastermind2-frontend.
 For the previous version of this app, Mastermind 1.0 see https://github.com/hmahajan99/Mastermind.
 
 > Deployed at https://mastermind2.herokuapp.com/
