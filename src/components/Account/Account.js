@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router";
 import Tilt from 'react-tilt';
 
 class AccountSettings extends React.Component {
@@ -36,7 +37,7 @@ class AccountSettings extends React.Component {
       .then(response => response.json())
       .then(data => {
           if(data.success){
-            this.props.onRouteChange('home')
+            this.props.history.push('/')
           }
       })
       .catch(err => 'error changing password')
@@ -58,7 +59,8 @@ class AccountSettings extends React.Component {
       .then(response => response.json())
       .then(data => {
           if(data.success){
-            this.props.onRouteChange('signout')
+            this.props.onDeleteAccount();
+            this.props.history.push('/');
           }
       })
       .catch(err => 'error deleting account')
@@ -143,4 +145,4 @@ class AccountSettings extends React.Component {
 
 }
 
-export default AccountSettings;
+export default withRouter(AccountSettings);

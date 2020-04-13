@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class NavIcon extends React.Component {
@@ -16,7 +17,7 @@ class NavIcon extends React.Component {
   }
 
   render() {
-    const { onRouteChange, isSignedIn, toggleModal } = this.props
+    const { onSignOut, isSignedIn, toggleModal, history } = this.props
     if(!isSignedIn){
       return (
         <div className="pa4 tc">
@@ -32,8 +33,9 @@ class NavIcon extends React.Component {
                     className="br-100 h3 w3 dib" alt="avatar" />
                 </DropdownToggle>
                 <DropdownMenu className='b--transparent shadow-5' style={{marginTop: '20px', backgroundColor: 'rgba(255, 255, 255, 0.5)'}} right>
-                  <DropdownItem onClick={() => onRouteChange('signin')}>Sign In</DropdownItem>
-                  <DropdownItem onClick={() => onRouteChange('register')}>Register</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/')}>Sign In</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/register')}>Register</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/leaderboard')}>Leaderboard</DropdownItem>
                   <DropdownItem divider/>
                   <DropdownItem >
                     <a href="https://github.com/hmahajan99" target="_blank" rel="noopener noreferrer" >GitHub</a>
@@ -60,12 +62,23 @@ class NavIcon extends React.Component {
                     className="br-100 h3 w3 dib" alt="avatar" />
                 </DropdownToggle>
                 <DropdownMenu className='b--transparent shadow-5' style={{marginTop: '20px', backgroundColor: 'rgba(255, 255, 255, 0.5)'}} right>
-                  <DropdownItem onClick={() => onRouteChange('home')}>Home</DropdownItem>
-                  <DropdownItem onClick={() => onRouteChange('leaderboard')}>Leaderboard</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/leaderboard')}>Leaderboard</DropdownItem>
                   <DropdownItem onClick={() => toggleModal()}>View Profile</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/account')}>Settings</DropdownItem>
                   <DropdownItem divider/>
-                  <DropdownItem onClick={() => onRouteChange('account')}>Settings</DropdownItem>
-                  <DropdownItem onClick={() => onRouteChange('signout')}>Sign Out</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/')}>Face Detection</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/celebrity')}>Celebrity</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/demographics')}>Demographics</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/concepts')}>Concepts</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/food')}>Food</DropdownItem>
+                  <DropdownItem onClick={() => history.push('/apparels')}>Apparels</DropdownItem>
+                  <DropdownItem divider/>
+                  <DropdownItem onClick={() => {
+                    onSignOut();
+                    this.props.history.push('/');
+                  }}>
+                    Sign Out
+                  </DropdownItem>
                   <DropdownItem divider/>
                   <DropdownItem >
                     <a href="https://github.com/hmahajan99" target="_blank" rel="noopener noreferrer" >GitHub</a>
@@ -81,4 +94,4 @@ class NavIcon extends React.Component {
   }
 }
 
-export default NavIcon;
+export default withRouter(NavIcon);

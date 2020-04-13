@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router";
 import './Signin.css';
 
 class Signin extends React.Component {
@@ -35,16 +36,16 @@ class Signin extends React.Component {
       .then(data => {
  
         if (data && data.success === "true") {
-          this.saveAuthTokenInSessions(data.token)
-          this.props.loadUser(data.user)
-          this.props.onRouteChange('home');
+          this.saveAuthTokenInSessions(data.token);
+          this.props.loadUserAndSignIn(data.user);
+          this.props.history.push("/");
         }
       })
       .catch(console.log)
   }
 
   render() {
-    const { onRouteChange } = this.props;
+    const { history } = this.props;
     return (
       <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
         <main className="pa4 black-80">
@@ -91,7 +92,7 @@ class Signin extends React.Component {
               </div>
               <div className="">
                 <input
-                  onClick={() => onRouteChange('register')}
+                  onClick={() => history.push('/register')}
                   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                   type="submit"
                   value="Register"
@@ -105,4 +106,4 @@ class Signin extends React.Component {
   }
 }
 
-export default Signin;
+export default withRouter(Signin);

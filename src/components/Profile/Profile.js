@@ -24,7 +24,7 @@ class Profile extends Component {
     }).then(resp => {
       if (resp.status === 200 || resp.status === 304) {
         this.props.toggleModal();
-        this.props.loadUser({ ...this.props.user, ...data });
+        this.props.loadUserAndSignIn({ ...this.props.user, ...data });
       }
     }).catch(console.log)
   }

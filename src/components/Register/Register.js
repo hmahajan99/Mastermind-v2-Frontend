@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router";
 import './Register.css';
 
 class Register extends React.Component {
@@ -41,9 +42,9 @@ class Register extends React.Component {
       .then(data => {
         
         if (data && data.success === "true") {
-          this.saveAuthTokenInSessions(data.token)
-          this.props.loadUser(data.user)
-          this.props.onRouteChange('home');
+          this.saveAuthTokenInSessions(data.token);
+          this.props.loadUserAndSignIn(data.user);
+          this.props.history.push("/");
         }
       })
   }
@@ -101,4 +102,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);
