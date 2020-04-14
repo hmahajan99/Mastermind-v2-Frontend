@@ -1,10 +1,10 @@
 import React from 'react';
 import './Image.css';
 
-const Image = ({ imageUrl, boxes, concepts }) => {
+const Image = ({ imageUrl, boxes }) => {
   return (
     <div className='center ma'>
-      <div className='absolute mt2'>
+      <div className='relative mt2'>
         <img id='inputimage' alt='' src={imageUrl} width='500px' heigh='auto'/>
         { 
           boxes.map(box =>
@@ -14,15 +14,8 @@ const Image = ({ imageUrl, boxes, concepts }) => {
             </div>
           )
         }
-        { 
-          concepts.map((concept,idx) =>
-            <div key={idx} className="white f3">
-              <strong>{concept.name}</strong> &#x000BB; {(concept.value*100).toFixed(2)}%
-            </div>
-          )
-        }
       </div>
-    </div>
+  </div>
   );
 }
 

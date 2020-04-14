@@ -11,7 +11,7 @@ class ImageAnalyzer extends Component {
       imageUrl: '',
       input: '',
       concepts: [],
-      boxes: []    
+      boxes: [],
     };
   }
 
@@ -181,7 +181,14 @@ class ImageAnalyzer extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
-        <Image boxes={boxes} concepts={concepts} imageUrl={imageUrl} />
+        <Image boxes={boxes} imageUrl={imageUrl} />
+        {
+          concepts.map((concept,idx) =>
+          <div key={idx} className="white f3">
+            <strong>{concept.name}</strong> &#x000BB; {(concept.value*100).toFixed(2)}%
+          </div>
+          )
+        }
       </div>
     );
   }
