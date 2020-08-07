@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from '../Loader/Loader'
 import { withRouter } from "react-router";
 import './Signin.css';
 
@@ -7,7 +8,8 @@ class Signin extends React.Component {
     super(props);
     this.state = {
       signInEmail: '',
-      signInPassword: ''
+      signInPassword: '',
+      loading: false
     }
   }
 
@@ -24,6 +26,7 @@ class Signin extends React.Component {
   }
 
   onSubmitSignIn = (user) => {
+    this.setState({loading: true})
     fetch(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -41,7 +44,8 @@ class Signin extends React.Component {
           this.props.history.push("/");
         }
       })
-      .catch(console.log)
+      .catch(err => console.log(err))
+      .then(() => this.setState({loading: false}))
   }
 
   render() {
@@ -99,6 +103,9 @@ class Signin extends React.Component {
                 />
               </div>            
             </div>
+            {
+              this.state.loading && <div className="mt3"> <Loader /> </div>
+            }
           </div>
         </main>
       </article>

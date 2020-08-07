@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from '../Loader/Loader'
 import Card from './LeaderboardCard';
 
 class Leaderboard extends React.Component {
@@ -6,11 +7,13 @@ class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      topUsers: []
+      topUsers: [],
+      loading: false
     }
   }
 
   componentDidMount() {
+    this.setState({loading: true})
     fetch(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`,{
       method: 'get',
       headers: {
@@ -18,28 +21,28 @@ class Leaderboard extends React.Component {
       }
     }).then(response => response.json())
       .then(users => {this.setState({ topUsers: users})})
-      .catch(err => 'error getting leaderboard')
+      .catch(err => console.log(err))
+      .then(() => this.setState({loading: false}))
   }
 
-
   render() {
-
       const {topUsers} =  this.state;
-
       return (
-        <div style={{display: 'flex',justifyContent: 'center',flexWrap: 'wrap'}}>
-        
-        {  
-          topUsers.map((user,i)=>{
-            return (
-              <Card key={i} user={user} />
-            )
-          })
-        }
-
+        <div>
+          <div style={{display: 'flex',justifyContent: 'center',flexWrap: 'wrap'}}>
+          {  
+            topUsers.map((user,i)=>{
+              return (
+                <Card key={i} user={user} />
+              )
+            })
+          }
+          </div>
+          {
+            this.state.loading && <div className="mt3"> <Loader /> </div>
+          }        
         </div>
       )
-
   }
 
 }

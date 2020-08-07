@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import Image from '../Image/Image';
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
+import Loader from '../Loader/Loader'
 import Rank from '../Rank/Rank';
 
 class ImageAnalyzer extends Component {
@@ -12,6 +13,7 @@ class ImageAnalyzer extends Component {
       input: '',
       concepts: [],
       boxes: [],
+      loading: false
     };
   }
 
@@ -132,6 +134,7 @@ class ImageAnalyzer extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
+    this.setState({loading: true});
     const action = this.getActionFromUrl();
     fetch(`${process.env.REACT_APP_BACKEND_URL}/imageurl`, {
       method: 'post',
@@ -162,11 +165,11 @@ class ImageAnalyzer extends Component {
           this.props.setUser(Object.assign(this.props.user, { entries: count}))
         })
         .catch(console.log)
-
       }
       this.setBoxesAndConcepts(this.extractData(action)(response));
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .then(() => this.setState({loading: false}))
   }
 
   render() {
@@ -181,6 +184,9 @@ class ImageAnalyzer extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
+        {
+          this.state.loading && <div className="mt3"> <Loader /> </div>
+        }
         <Image boxes={boxes} imageUrl={imageUrl} />
         {
           concepts.map((concept,idx) =>

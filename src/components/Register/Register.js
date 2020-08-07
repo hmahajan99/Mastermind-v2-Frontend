@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from '../Loader/Loader'
 import { withRouter } from "react-router";
 import './Register.css';
 
@@ -8,7 +9,8 @@ class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
-      name: ''
+      name: '',
+      loading: false
     }
   }
 
@@ -29,6 +31,7 @@ class Register extends React.Component {
   }
 
   onSubmitRegister = () => {
+    this.setState({loading: true})
     fetch(`${process.env.REACT_APP_BACKEND_URL}/register`, {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -40,13 +43,14 @@ class Register extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        
         if (data && data.success === "true") {
           this.saveAuthTokenInSessions(data.token);
           this.props.loadUserAndSignIn(data.user);
           this.props.history.push("/");
         }
       })
+      .catch(err => console.log(err))
+      .then(() => this.setState({loading: false}))
   }
 
   render() {
@@ -95,6 +99,9 @@ class Register extends React.Component {
                 value="Register"
               />
             </div>
+            {
+              this.state.loading && <div className="mt3"> <Loader /> </div>
+            }
           </div>
         </main>
       </article>
